@@ -1,0 +1,216 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "bhaskaradf"
+		},
+		"Blob_Datafiles_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Blob_Datafiles'"
+		},
+		"DB_DESTINATION_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DB_DESTINATION'"
+		},
+		"DB_SOURCE_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DB_SOURCE'"
+		},
+		"MyFileSystem_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'MyFileSystem'"
+		},
+		"OnPremiseFileSystem_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremiseFileSystem'"
+		},
+		"BhaskarADLA_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'BhaskarADLA'"
+		},
+		"ADLS_bhaskarADLS_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLS_bhaskarADLS'"
+		},
+		"MyFileSystem_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\Rudrasoft\\source"
+		},
+		"MyFileSystem_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "rudra"
+		},
+		"OnPremiseFileSystem_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\RUDRASOFT\\Azure Data Factory\\datafiles\\"
+		},
+		"OnPremiseFileSystem_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "bhaskar"
+		},
+		"EventTrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/cff93925-d4d9-40f3-9a21-1f1387e31314/resourceGroups/bhaskarresourcegroup/providers/Microsoft.Storage/storageAccounts/bhaskarstorageaccount"
+		},
+		"BhaskarADLA_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "bhaskaradla"
+		},
+		"BhaskarADLA_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "407e5f67-5313-4b5d-99cb-3dd116e21353"
+		},
+		"BhaskarADLA_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "8a7492e8-7d36-413b-9bc2-15117a8dd628"
+		},
+		"BhaskarADLA_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "cff93925-d4d9-40f3-9a21-1f1387e31314"
+		},
+		"BhaskarADLA_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "bhaskarresourcegroup"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://bhaskaradlsgen1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "407e5f67-5313-4b5d-99cb-3dd116e21353"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "8a7492e8-7d36-413b-9bc2-15117a8dd628"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "cff93925-d4d9-40f3-9a21-1f1387e31314"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "bhaskarresourcegroup"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Blob_Datafiles_connectionString": {
+						"value": "[parameters('Blob_Datafiles_connectionString')]"
+					},
+					"DB_DESTINATION_connectionString": {
+						"value": "[parameters('DB_DESTINATION_connectionString')]"
+					},
+					"DB_SOURCE_connectionString": {
+						"value": "[parameters('DB_SOURCE_connectionString')]"
+					},
+					"BhaskarADLA_servicePrincipalKey": {
+						"value": "[parameters('BhaskarADLA_servicePrincipalKey')]"
+					},
+					"ADLS_bhaskarADLS_servicePrincipalKey": {
+						"value": "[parameters('ADLS_bhaskarADLS_servicePrincipalKey')]"
+					},
+					"MyFileSystem_password": {
+						"value": "[parameters('MyFileSystem_password')]"
+					},
+					"OnPremiseFileSystem_password": {
+						"value": "[parameters('OnPremiseFileSystem_password')]"
+					},
+					"BhaskarADLA_properties_typeProperties_accountName": {
+						"value": "[parameters('BhaskarADLA_properties_typeProperties_accountName')]"
+					},
+					"BhaskarADLA_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('BhaskarADLA_properties_typeProperties_servicePrincipalId')]"
+					},
+					"BhaskarADLA_properties_typeProperties_tenant": {
+						"value": "[parameters('BhaskarADLA_properties_typeProperties_tenant')]"
+					},
+					"BhaskarADLA_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('BhaskarADLA_properties_typeProperties_subscriptionId')]"
+					},
+					"BhaskarADLA_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('BhaskarADLA_properties_typeProperties_resourceGroupName')]"
+					},
+					"ADLS_bhaskarADLS_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('ADLS_bhaskarADLS_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"ADLS_bhaskarADLS_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('ADLS_bhaskarADLS_properties_typeProperties_servicePrincipalId')]"
+					},
+					"ADLS_bhaskarADLS_properties_typeProperties_tenant": {
+						"value": "[parameters('ADLS_bhaskarADLS_properties_typeProperties_tenant')]"
+					},
+					"ADLS_bhaskarADLS_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('ADLS_bhaskarADLS_properties_typeProperties_subscriptionId')]"
+					},
+					"ADLS_bhaskarADLS_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('ADLS_bhaskarADLS_properties_typeProperties_resourceGroupName')]"
+					},
+					"MyFileSystem_properties_typeProperties_host": {
+						"value": "[parameters('MyFileSystem_properties_typeProperties_host')]"
+					},
+					"MyFileSystem_properties_typeProperties_userId": {
+						"value": "[parameters('MyFileSystem_properties_typeProperties_userId')]"
+					},
+					"OnPremiseFileSystem_properties_typeProperties_host": {
+						"value": "[parameters('OnPremiseFileSystem_properties_typeProperties_host')]"
+					},
+					"OnPremiseFileSystem_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremiseFileSystem_properties_typeProperties_userId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"EventTrigger_properties_typeProperties_scope": {
+						"value": "[parameters('EventTrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		}
+	]
+}

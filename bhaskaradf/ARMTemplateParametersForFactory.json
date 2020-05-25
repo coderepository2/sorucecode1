@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "bhaskaradf"
+		},
+		"Blob_Datafiles_connectionString": {
+			"value": ""
+		},
+		"DB_DESTINATION_connectionString": {
+			"value": ""
+		},
+		"DB_SOURCE_connectionString": {
+			"value": ""
+		},
+		"MyFileSystem_password": {
+			"value": ""
+		},
+		"OnPremiseFileSystem_password": {
+			"value": ""
+		},
+		"BhaskarADLA_servicePrincipalKey": {
+			"value": ""
+		},
+		"ADLS_bhaskarADLS_servicePrincipalKey": {
+			"value": ""
+		},
+		"MyFileSystem_properties_typeProperties_host": {
+			"value": "\\\\Rudrasoft\\source"
+		},
+		"MyFileSystem_properties_typeProperties_userId": {
+			"value": "rudra"
+		},
+		"OnPremiseFileSystem_properties_typeProperties_host": {
+			"value": "\\\\RUDRASOFT\\Azure Data Factory\\datafiles\\"
+		},
+		"OnPremiseFileSystem_properties_typeProperties_userId": {
+			"value": "bhaskar"
+		},
+		"EventTrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/cff93925-d4d9-40f3-9a21-1f1387e31314/resourceGroups/bhaskarresourcegroup/providers/Microsoft.Storage/storageAccounts/bhaskarstorageaccount"
+		},
+		"BhaskarADLA_properties_typeProperties_accountName": {
+			"value": "bhaskaradla"
+		},
+		"BhaskarADLA_properties_typeProperties_servicePrincipalId": {
+			"value": "407e5f67-5313-4b5d-99cb-3dd116e21353"
+		},
+		"BhaskarADLA_properties_typeProperties_tenant": {
+			"value": "8a7492e8-7d36-413b-9bc2-15117a8dd628"
+		},
+		"BhaskarADLA_properties_typeProperties_subscriptionId": {
+			"value": "cff93925-d4d9-40f3-9a21-1f1387e31314"
+		},
+		"BhaskarADLA_properties_typeProperties_resourceGroupName": {
+			"value": "bhaskarresourcegroup"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://bhaskaradlsgen1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_servicePrincipalId": {
+			"value": "407e5f67-5313-4b5d-99cb-3dd116e21353"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_tenant": {
+			"value": "8a7492e8-7d36-413b-9bc2-15117a8dd628"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_subscriptionId": {
+			"value": "cff93925-d4d9-40f3-9a21-1f1387e31314"
+		},
+		"ADLS_bhaskarADLS_properties_typeProperties_resourceGroupName": {
+			"value": "bhaskarresourcegroup"
+		}
+	}
+}

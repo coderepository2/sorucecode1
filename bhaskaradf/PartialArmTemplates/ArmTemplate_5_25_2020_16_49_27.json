@@ -1,0 +1,96 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "bhaskaradf"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/USQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "U-SQL1",
+						"type": "DataLakeAnalyticsU-SQL",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"scriptPath": "u-sql1/USQL.uql",
+							"scriptLinkedService": {
+								"referenceName": "ADLS_bhaskarADLS",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "BhaskarADLA",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BhaskarADLA')]",
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_bhaskarADLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BhaskarADLA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeAnalytics",
+				"typeProperties": {
+					"accountName": "bhaskaradla",
+					"servicePrincipalId": "407e5f67-5313-4b5d-99cb-3dd116e21353",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "8a7492e8-7d36-413b-9bc2-15117a8dd628",
+					"subscriptionId": "cff93925-d4d9-40f3-9a21-1f1387e31314",
+					"resourceGroupName": "bhaskarresourcegroup"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_bhaskarADLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "https://bhaskaradlsgen1.azuredatalakestore.net/webhdfs/v1",
+					"servicePrincipalId": "407e5f67-5313-4b5d-99cb-3dd116e21353",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "8a7492e8-7d36-413b-9bc2-15117a8dd628",
+					"subscriptionId": "cff93925-d4d9-40f3-9a21-1f1387e31314",
+					"resourceGroupName": "bhaskarresourcegroup"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
