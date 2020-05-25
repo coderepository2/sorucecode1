@@ -1,0 +1,32 @@
+{
+	"name": "USQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "U-SQL1",
+				"type": "DataLakeAnalyticsU-SQL",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "u-sql1/USQL.uql",
+					"scriptLinkedService": {
+						"referenceName": "ADLS_bhaskarADLS",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "BhaskarADLA",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
