@@ -1,0 +1,16 @@
+{
+	"name": "BhaskarADLA",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeAnalytics",
+		"typeProperties": {
+			"accountName": "bhaskaradla",
+			"servicePrincipalId": "407e5f67-5313-4b5d-99cb-3dd116e21353",
+			"tenant": "8a7492e8-7d36-413b-9bc2-15117a8dd628",
+			"subscriptionId": "cff93925-d4d9-40f3-9a21-1f1387e31314",
+			"resourceGroupName": "bhaskarresourcegroup",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkJIQVNLQVJBREZfZTVhZDZjY2UtMGFmOC00MTAzLWIxZDEtZGM3NWRkMDJmMTg5Ig0KfQ=="
+		}
+	}
+}
