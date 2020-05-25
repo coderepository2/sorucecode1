@@ -1,0 +1,6 @@
+{
+	"name": "PersonalIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

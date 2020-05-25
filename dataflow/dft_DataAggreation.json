@@ -1,0 +1,45 @@
+{
+	"name": "dft_DataAggreation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "src_dt_Employee",
+						"type": "DatasetReference"
+					},
+					"name": "Employee"
+				},
+				{
+					"dataset": {
+						"referenceName": "scr_dt_Department",
+						"type": "DatasetReference"
+					},
+					"name": "Department"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dest_dt_DimAggr",
+						"type": "DatasetReference"
+					},
+					"name": "DimAggr"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectRequiredColumns"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "EmployeeDepartment"
+				}
+			],
+			"script": "source(output(\n\t\tEmpno as integer,\n\t\tEname as string,\n\t\tJob as string,\n\t\tSal as decimal(19,4),\n\t\tDeptno as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Employee\nsource(output(\n\t\tDNO as integer,\n\t\tDNAME as string,\n\t\tLOC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Department\nEmployee select(mapColumn(\n\t\tSalary = Sal,\n\t\tDeptno\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> selectRequiredColumns\nselectRequiredColumns aggregate(groupBy(Deptno = Deptno),\n\tSalary = sum(Salary)) ~> Aggregate1\nAggregate1, Department join(Deptno == DNO,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> EmployeeDepartment\nEmployeeDepartment sink(input(\n\t\tDeptno as integer,\n\t\tDNAME as string,\n\t\tLOCATION as string,\n\t\t{Total Salary} as decimal(19,4)\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tDeptno,\n\t\t{Total Salary} = Salary,\n\t\tDNAME,\n\t\tLOCATION = LOC\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DimAggr"
+		}
+	}
+}

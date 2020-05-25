@@ -1,0 +1,31 @@
+{
+	"name": "scr_dt_Department",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DB_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DNO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DNAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LOC",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Department"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

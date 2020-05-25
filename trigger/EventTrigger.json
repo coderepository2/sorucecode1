@@ -1,0 +1,24 @@
+{
+	"name": "EventTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Data Aggregtion",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/datafiles/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/cff93925-d4d9-40f3-9a21-1f1387e31314/resourceGroups/bhaskarresourcegroup/providers/Microsoft.Storage/storageAccounts/bhaskarstorageaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

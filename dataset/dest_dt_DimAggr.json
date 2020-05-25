@@ -1,0 +1,37 @@
+{
+	"name": "dest_dt_DimAggr",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DB_DESTINATION",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Deptno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DNAME",
+				"type": "varchar"
+			},
+			{
+				"name": "LOCATION",
+				"type": "varchar"
+			},
+			{
+				"name": "Total Salary",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DimAggr"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

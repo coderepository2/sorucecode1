@@ -1,0 +1,22 @@
+{
+	"name": "dt_datafiles_Emloyee",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OnPremiseFileSystem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "Employee.txt"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

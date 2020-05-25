@@ -1,0 +1,135 @@
+{
+	"name": "Data Aggregtion",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Empno",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Empno",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Ename",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Ename",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Job",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Job",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Sal",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Sal",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Deptno",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Deptno",
+									"type": "Int32"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dt_blob_Employee",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "src_dt_Employee",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dft_DataAggreation",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					}
+				}
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,42 @@
+{
+	"name": "OnPremise To Azure",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "src_dt_Employee",
+						"type": "DatasetReference"
+					},
+					"name": "Employee"
+				},
+				{
+					"dataset": {
+						"referenceName": "scr_dt_Department",
+						"type": "DatasetReference"
+					},
+					"name": "Department"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dest_dt_DimEmployee",
+						"type": "DatasetReference"
+					},
+					"name": "DimEmployee"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterSalary"
+				},
+				{
+					"name": "ExsistsDepartments"
+				}
+			],
+			"script": "source(output(\n\t\tEmpno as integer,\n\t\tEname as string,\n\t\tJob as string,\n\t\tSal as decimal(19,4),\n\t\tDeptno as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Employee\nsource(output(\n\t\tDNO as integer,\n\t\tDNAME as string,\n\t\tLOC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Department\nEmployee filter(toDecimal(Sal) > 2000) ~> FilterSalary\nFilterSalary, Department exists(toInteger(Deptno) == DNO,\n\tnegate:true,\n\tbroadcast: 'auto')~> ExsistsDepartments\nExsistsDepartments sink(input(\n\t\tEmpno as integer,\n\t\tEname as string,\n\t\tJob as string,\n\t\tSal as decimal(19,4),\n\t\tDeptno as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tEmpno,\n\t\tEname,\n\t\tJob,\n\t\tSal,\n\t\tDeptno\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DimEmployee"
+		}
+	}
+}

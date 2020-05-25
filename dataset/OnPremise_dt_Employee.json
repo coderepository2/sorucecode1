@@ -1,0 +1,44 @@
+{
+	"name": "OnPremise_dt_Employee",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OnPremiseFileSystem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "Employee.txt"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Empno",
+				"type": "String"
+			},
+			{
+				"name": "Ename",
+				"type": "String"
+			},
+			{
+				"name": "Job",
+				"type": "String"
+			},
+			{
+				"name": "Sal",
+				"type": "String"
+			},
+			{
+				"name": "Deptno",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

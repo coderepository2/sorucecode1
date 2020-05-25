@@ -1,0 +1,17 @@
+{
+	"name": "MyFileSystem",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "\\\\Rudrasoft\\source",
+			"userId": "rudra",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjZGU3ZjFjNC1hNzUxLTRjYzAtYjEwNC1kOWYzODE0Y2I4ZWEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "PersonalIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
